@@ -13,8 +13,6 @@
 #include <ctype.h>
 #include <stdio.h>
 #include "corrector.h"
-
-//#define MAXPALABRAS 5000
 //Funciones publicas del proyecto
 /*****************************************************************************************************************
     DICCIONARIO: Esta funcion crea el diccionario completo
