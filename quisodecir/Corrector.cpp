@@ -13,7 +13,7 @@
 #include <ctype.h>
 #include <stdio.h>
 #include "corrector.h"
-//#define TAMTOKEN 50
+
 //#define MAXPALABRAS 5000
 //Funciones publicas del proyecto
 /*****************************************************************************************************************
