@@ -278,8 +278,8 @@ void	ClonaPalabras(char* szPalabraLeida,	// Palabra a clonar
         // aquí temp contiene la palabra con el carácter i eliminado
         //char* szPalabraLeida = Aux;
         // guardar en la lista de sugerencias
-        strcpy_s(szPalabrasSugeridas[iNumSugeridas], Aux);
-        iNumSugeridas++; // incrementar número de sugerencias
+        /*strcpy_s(szPalabrasSugeridas[iNumSugeridas], Aux);
+        iNumSugeridas++; // incrementar número de sugerencias*/
     }
     //Sustituya estas lineas por su código
     strcpy_s(szPalabrasSugeridas[iNumSugeridas], szPalabraLeida); //lo que sea que se capture, es sugerencia
