@@ -31,8 +31,8 @@ void Diccionario(char* szNombre, char szPalabras[][TAMTOKEN], int iEstadisticas[
 
     iNumElementos = 0; // Reinicio contador
     char tmp[TAMTOKEN]; // Variable temporal para armar palabra
-    int pos = 0; // Posici√≥n actual en el temporal
-    int c; // Caracter le√≠do
+    int pos = 0; // PosiciÛn actual en el temporal
+    int c; // Caracter leÌdo
 
     // Leo caracter por caracter hasta el final
     while ((c = fgetc(f)) != EOF)
@@ -40,10 +40,10 @@ void Diccionario(char* szNombre, char szPalabras[][TAMTOKEN], int iEstadisticas[
         // Convierto a minuscula de una vez
         c = tolower(c);
 
-        // Verifico si es un separador v√°lido
+        // Verifico si es un separador v·lido
         if (c == ' ' || c == '.' || c == ',' || c == ';' || c == '(' || c == ')' || c == '\n' || c == '\r' || c == '\t')
         {
-            // Si llego aqu√≠, es un separador.
+            // Si llego aquÌ, es un separador.
             // Si tengo algo en 'tmp', significa que acabo de terminar una palabra.
             if (pos > 0)
             {
@@ -59,13 +59,13 @@ void Diccionario(char* szNombre, char szPalabras[][TAMTOKEN], int iEstadisticas[
                     {
                         repetido = 1;
                         idx = k;
-                        break; // Ya la encontr√©, dejo de buscar
+                        break; // Ya la encontrÈ, dejo de buscar
                     }
                 }
 
                 if (repetido == 1)
                 {
-                    // Solo sumo 1 a la estad√≠stica
+                    // Solo sumo 1 a la estadÌstica
                     iEstadisticas[idx]++;
                 }
                 else
@@ -76,19 +76,19 @@ void Diccionario(char* szNombre, char szPalabras[][TAMTOKEN], int iEstadisticas[
                     iNumElementos++;
                 }
 
-                pos = 0; // Reseteo la posici√≥n para la siguiente palabra
+                pos = 0; // Reseteo la posiciÛn para la siguiente palabra
             }
         }
         else
         {
-            // No es separador, es una letra v√°lida, la agrego al buffer
+            // No es separador, es una letra v·lida, la agrego al buffer
             tmp[pos] = c;
             pos++;
         }
     }
 
     // OJO: Si el archivo termina en una letra y no en un espacio, 
-    // hay que procesar la √∫ltima palabra que qued√≥ en el buffer
+    // hay que procesar la ˙ltima palabra que quedÛ en el buffer
     if (pos > 0)
     {
         tmp[pos] = '\0';
@@ -115,13 +115,13 @@ void Diccionario(char* szNombre, char szPalabras[][TAMTOKEN], int iEstadisticas[
 
     fclose(f);
 
-    // Ordenar (Burbuja est√°ndar)
+    // Ordenar (Burbuja est·ndar)
     char auxP[TAMTOKEN];
     int auxE;
 
     for (int x = 0; x < iNumElementos - 1; x++)
     {
-        for (int y = 0; y < iNumElementos - 1; y++) // No optimic√© el rango -x
+        for (int y = 0; y < iNumElementos - 1; y++) // No optimicÈ el rango -x
         {
             if (strcmp(szPalabras[y], szPalabras[y + 1]) > 0)
             {
@@ -179,7 +179,7 @@ void ListaCandidatas(
     // Recorro todas las palabras sugeridas una por una
     for (i = 0; i < iNumSugeridas; i = i + 1)
     {
-        encontrada = 0; // Asumo que no est√°
+        encontrada = 0; // Asumo que no est·
         posicionDiccionario = -1;
 
         // Primero busco si la palabra existe en el diccionario grande
@@ -189,11 +189,11 @@ void ListaCandidatas(
             {
                 encontrada = 1;
                 posicionDiccionario = j;
-                // No pongo break para asegurar que revisa todo (ineficiencia a prop√≥sito)
+                // No pongo break para asegurar que revisa todo (ineficiencia a propÛsito)
             }
         }
 
-        // Si la encontr√© en el diccionario, ahora reviso que no la haya metido ya a la lista final
+        // Si la encontrÈ en el diccionario, ahora reviso que no la haya metido ya a la lista final
         if (encontrada == 1)
         {
             yaExiste = 0; // Asumo que es nueva
@@ -211,7 +211,7 @@ void ListaCandidatas(
                 // Copio la palabra a la lista final
                 strcpy_s(szListaFinal[iNumLista], szPalabrasSugeridas[i]);
 
-                // Guardo su peso correspondiente usando la posici√≥n que guard√© antes
+                // Guardo su peso correspondiente usando la posiciÛn que guardÈ antes
                 iPeso[iNumLista] = iEstadisticas[posicionDiccionario];
 
                 // Aumento el contador de la lista
@@ -220,8 +220,8 @@ void ListaCandidatas(
         }
     }
 
-    // Acomodo la lista del m√°s pesado al m√°s ligero (M√©todo Burbuja)
-    // Uso un ciclo doble cl√°sico
+    // Acomodo la lista del m·s pesado al m·s ligero (MÈtodo Burbuja)
+    // Uso un ciclo doble cl·sico
     for (i = 0; i < iNumLista; i++)
     {
         for (j = 0; j < iNumLista - 1; j++)
@@ -234,7 +234,7 @@ void ListaCandidatas(
                 iPeso[j] = iPeso[j + 1];
                 iPeso[j + 1] = auxPeso;
 
-                // Intercambio las palabras tambi√©n para que coincidan con su peso
+                // Intercambio las palabras tambiÈn para que coincidan con su peso
                 strcpy_s(auxPalabra, szListaFinal[j]);
                 strcpy_s(szListaFinal[j], szListaFinal[j + 1]);
                 strcpy_s(szListaFinal[j + 1], auxPalabra);
@@ -242,45 +242,146 @@ void ListaCandidatas(
         }
     }
 }
-    /*
-    //Sustituya estas lineas por su c√≥digo
-    strcpy_s(szListaFinal[0], szPalabrasSugeridas[0]); //la palabra candidata
-    iPeso[0] = iEstadisticas[0];			// el peso de la palabra candidata
-
-    iNumLista = 1;							//Una sola palabra candidata
-    */
 /*****************************************************************************************************************
     ClonaPalabras: toma una palabra y obtiene todas las combinaciones y permutaciones requeridas por el metodo
     char *	szPalabraLeida,						// Palabra a clonar
     char	szPalabrasSugeridas[][TAMTOKEN], 	//Lista de palabras clonadas
     int &	iNumSugeridas)						//Numero de elementos en la lista
 ******************************************************************************************************************/
-void	ClonaPalabras(char* szPalabraLeida,	// Palabra a clonar
-    char	szPalabrasSugeridas[][TAMTOKEN], 	//Lista de palabras clonadas
-    int& iNumSugeridas)						//Numero de elementos en la lista
+void ClonaPalabras(
+    char* szPalabraLeida,						// Palabra a clonar
+    char szPalabrasSugeridas[][TAMTOKEN], 		// Lista de palabras clonadas
+    int& iNumSugeridas)							// Numero de elementos en la lista
 {
-    //Funcion que ignora palabras vacias o en blanco 
-    if (szPalabraLeida == NULL || strlen(szPalabraLeida) == 0)
+    // Lista de caracteres permitidos 
+    char letras[] = { 'a','b','c','d','e','f','g','h','i','j','k','l','m','n','Ò','o','p','q','r','s','t','u','v','w','x','y','z','·','È','Ì','Û','˙' };
+    int total_letras = 32;
+
+    int Lectura = strlen(szPalabraLeida);
+
+    // Variables auxiliares para los bucles
+    int i, j, k;
+
+    // Buffer temporal para armar las palabras antes de guardarlas
+    char Temporal[TAMTOKEN];
+
+    // Reinicio el contador global
+    iNumSugeridas = 0;
+
+    strcpy_s(szPalabrasSugeridas[iNumSugeridas], szPalabraLeida);
+    iNumSugeridas++;
+
+    // ---------------------------------------------------------
+    // CASO 1: BORRAR UNA LETRA (DELETION)
+    // ---------------------------------------------------------
+    for (i = 0; i < Lectura; i++)
     {
-        return;
-    }
-    int palabraALeer = strlen(szPalabraLeida);
-    // 1. Eliminaci√≥n de caracter
-    for (int i = 0; i < palabraALeer; i++)
-    {
-        char Aux[TAMTOKEN];
-        strcpy_s(Aux, TAMTOKEN, szPalabraLeida); // copiamos la palabra original
-        // eliminar el caracter temp[i]
-        for (int k = i; k < palabraALeer; k++) 
+        // Copio la palabra salt·ndome la letra en la posiciÛn 'i'
+        int pos_temp = 0;
+        for (j = 0; j < Lectura; j++)
         {
-            Aux[k] = Aux[k + 1];  // recorre a la izquierda
+            if (i != j) // Solo copio si no es la letra que quiero borrar
+            {
+                Temporal[pos_temp] = szPalabraLeida[j];
+                pos_temp++;
+            }
         }
-        // aqu√≠ temp contiene la palabra con el car√°cter i eliminado
-        //char* szPalabraLeida = Aux;
-        // guardar en la lista de sugerencias
-        /*strcpy_s(szPalabrasSugeridas[iNumSugeridas], Aux);
-        iNumSugeridas++; // incrementar n√∫mero de sugerencias*/
+        Temporal[pos_temp] = '\0'; // Cierro la cadena manualmente
+
+        // Guardo en la matriz de salida
+        strcpy_s(szPalabrasSugeridas[iNumSugeridas], Temporal);
+        iNumSugeridas++;
     }
-    //Sustituya estas lineas por su c√≥digo
-    strcpy_s(szPalabrasSugeridas[iNumSugeridas], szPalabraLeida); //lo que sea que se capture, es sugerencia
+
+    // ---------------------------------------------------------
+    // CASO 2: CAMBIAR DE LUGAR (TRANSPOSITION)
+    // ---------------------------------------------------------
+    for (i = 0; i < Lectura - 1; i++) // Voy hasta el pen˙ltimo
+    {
+        // Copio la original primero
+        strcpy_s(Temporal, szPalabraLeida);
+
+        // Hago el swap manual usando una variable char extra
+        char c_aux = Temporal[i];
+        Temporal[i] = Temporal[i + 1];
+        Temporal[i + 1] = c_aux;
+
+        // La guardo
+        strcpy_s(szPalabrasSugeridas[iNumSugeridas], Temporal);
+        iNumSugeridas++;
+    }
+
+    // ---------------------------------------------------------
+    // CASO 3: CAMBIAR LETRA POR OTRA (SUBSTITUTION)
+    // ---------------------------------------------------------
+    for (i = 0; i < Lectura; i++)
+    {
+        // Pruebo con todas las letras del abecedario en esa posiciÛn
+        for (j = 0; j < total_letras; j++)
+        {
+            // Copio la original para no daÒar la referencia
+            strcpy_s(Temporal, szPalabraLeida);
+
+            // Piso la letra en la posiciÛn 'i'
+            Temporal[i] = letras[j];
+
+            // Guardo
+            strcpy_s(szPalabrasSugeridas[iNumSugeridas], Temporal);
+            iNumSugeridas++;
+        }
+    }
+
+    // ---------------------------------------------------------
+    // CASO 4: METER UNA LETRA NUEVA (INSERTION)
+    // ---------------------------------------------------------
+    // Este loop va hasta len incluido, porque puedo insertar al final
+    for (i = 0; i <= Lectura; i++)
+    {
+        for (j = 0; j < total_letras; j++)
+        {
+            // Construyo la palabra en 3 pasos:
+
+            // 1. Copio la primera parte (antes de la inserciÛn)
+            int p = 0; // Puntero del temporal
+            for (k = 0; k < i; k++)
+            {
+                Temporal[p] = szPalabraLeida[k];
+                p++;
+            }
+
+            // 2. Meto la letra nueva
+            Temporal[p] = letras[j];
+            p++;
+
+            // 3. Copio el resto de la palabra original
+            for (k = i; k < Lectura; k++)
+            {
+                Temporal[p] = szPalabraLeida[k];
+                p++;
+            }
+            Temporal[p] = '\0'; // Importante cerrar
+
+            strcpy_s(szPalabrasSugeridas[iNumSugeridas], Temporal);
+            iNumSugeridas++;
+        }
+    }
+
+    // ---------------------------------------------------------
+    // ORDENAR (BURBUJA)
+    // ---------------------------------------------------------
+    char AuxSugerida[TAMTOKEN];
+
+    for (i = 0; i < iNumSugeridas - 1; i++)
+    {
+        for (j = 0; j < iNumSugeridas - 1; j++)
+        {
+            // Si la palabra actual es mayor que la siguiente, cambio
+            if (strcmp(szPalabrasSugeridas[j], szPalabrasSugeridas[j + 1]) > 0)
+            {
+                strcpy_s(AuxSugerida, szPalabrasSugeridas[j]);
+                strcpy_s(szPalabrasSugeridas[j], szPalabrasSugeridas[j + 1]);
+                strcpy_s(szPalabrasSugeridas[j + 1], AuxSugerida);
+            }
+        }
+    }
 }
